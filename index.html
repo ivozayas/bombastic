@@ -9,18 +9,24 @@
 </head>
 <body>
     <section class="game-container">
+        <h1 id="title">Boombastic</h1>
+
         <canvas id="game"></canvas>
 
         <div class="buttons">
-            <button id="up">Arriba</button>
-            <button id="left">Izquierda</button>
-            <button id="right">Derecha</button>
-            <button id="down">Abajo</button>
+            <button onmousedown="moverArriba()" onmouseup="detenerMovimiento()">⬆</button>
+            <div>
+                <button onmousedown="moverIzquierda()" onmouseup="detenerMovimiento()">⬅</button>
+                <button onmousedown="moverAbajo()" onmouseup="detenerMovimiento()">⬇</button>
+                <button onmousedown="moverDerecha()" onmouseup="detenerMovimiento()">➡</button>
+            </div>
         </div>
+            
+        <h3>Muévete con ⬆ ⬅ ⬇ ➡</h3>
+    </section>
 
-        <div class="messages">
-            <!-- to do -->
-        </div>
+    <section class="messages">
+        <!-- to do -->
     </section>
 
     <script src="./maps.js"></script>
