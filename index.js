@@ -206,8 +206,6 @@ function gameWin() {
     }
     
     console.log({recordTime, playerTime});
-
-    // timeStart = undefined
 }
 
 function showLives(){
