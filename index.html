@@ -11,22 +11,26 @@
     <section class="game-container">
         <h1 id="title">Boombastic</h1>
 
+        <p id="result"></p>
+        
         <canvas id="game"></canvas>
 
         <div class="buttons">
-            <button onmousedown="moverArriba()" onmouseup="detenerMovimiento()">⬆</button>
+            <button onmousedown="moveUp()" onmouseup="stopMovement()" id='up'>⬆</button>
             <div>
-                <button onmousedown="moverIzquierda()" onmouseup="detenerMovimiento()">⬅</button>
-                <button onmousedown="moverAbajo()" onmouseup="detenerMovimiento()">⬇</button>
-                <button onmousedown="moverDerecha()" onmouseup="detenerMovimiento()">➡</button>
+                <button onmousedown="moveLeft()" onmouseup="stopMovement()" id='left'>⬅</button>
+                <button onmousedown="moveDown()" onmouseup="stopMovement()" id='down'>⬇</button>
+                <button onmousedown="moveRight()" onmouseup="stopMovement()" id='right'>➡</button>
             </div>
         </div>
             
-        <h3>Muévete con ⬆ ⬅ ⬇ ➡</h3>
+        <!-- <h3>Muévete con ⬆ ⬅ ⬇ ➡</h3> -->
     </section>
 
     <section class="messages">
-        <!-- to do -->
+        <p>Vidas: <span id="lives"></span></p>
+        <p>Tiempo: ⏱<span id="time"></span></p>
+        <p>Record: 🥇<span id="record"></span></p>
     </section>
 
     <script src="./maps.js"></script>

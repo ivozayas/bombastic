@@ -9,8 +9,8 @@ body {
 #title {
     font-family: 'Rubik Spray Paint', cursive;
     font-weight: normal;
-    font-size: 80px;
-    color: white;
+    font-size: 40px;
+    color: #b34223;
 }
 
 .game-container{
@@ -19,10 +19,11 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+
 }
   
   canvas {
-    border: 3px solid #be6844;
+    border: 3px solid #b34223;
     border-radius: 8px;
     background-color: #feff9d;
   }
@@ -37,7 +38,7 @@ body {
   button {
     background-color:  rgb(255, 226, 82);
     border-radius: 15px;
-    border: 3px solid #be6844;
+    border: 3px solid #b34223;
     color: #542a19;
     font-family: inherit;
     margin-top: 8px;
