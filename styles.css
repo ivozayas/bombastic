@@ -28,7 +28,7 @@ body {
     background-color: #feff9d;
   }
   
-  .buttons {
+  #buttons {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -44,6 +44,16 @@ body {
     margin-top: 8px;
     padding: 5px;
     width: 80px;
+  }
+
+  #restart-button{
+    display: none;
+    font-size: 20px;
+    font-family: 'Rubik Spray Paint', cursive;
+    width: 150px;
+    padding: 10px;
+    color: #b34223;
+    margin-top: 20px;
   }
   /* button:not(:last-child) {
     margin-right: 10px;
@@ -66,4 +76,9 @@ body {
   @media (max-width: 440px) {
     button { margin-top: 25px; }
     #up, #down { margin-left: 100%; margin-right: 100%; }
+  }
+
+  #restart-button:hover{
+    background-color: #b34223;
+    color: rgb(255, 226, 82);
   }

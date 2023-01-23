@@ -16,13 +16,17 @@
         
         <canvas id="game"></canvas>
 
-        <div class="buttons">
-            <button onmousedown="moveUp()" onmouseup="stopMovement()" id='up'>⬆</button>
+        <div id="buttons">
+            <button onmousedown="moveUp()" id='up'>⬆</button>
             <div>
-                <button onmousedown="moveLeft()" onmouseup="stopMovement()" id='left'>⬅</button>
-                <button onmousedown="moveDown()" onmouseup="stopMovement()" id='down'>⬇</button>
-                <button onmousedown="moveRight()" onmouseup="stopMovement()" id='right'>➡</button>
+                <button onmousedown="moveLeft()" id='left'>⬅</button>
+                <button onmousedown="moveDown()" id='down'>⬇</button>
+                <button onmousedown="moveRight()" id='right'>➡</button>
             </div>
+        </div>
+
+        <div>
+            <button onmousedown="restartGame()" id="restart-button">REINICIAR</button>
         </div>
             
         <!-- <h3>Muévete con ⬆ ⬅ ⬇ ➡</h3> -->

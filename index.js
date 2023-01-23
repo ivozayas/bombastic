@@ -7,16 +7,19 @@ const rightBtn = document.getElementById('right')
 const spanLives = document.getElementById('lives')
 const spanTime = document.getElementById('time')
 const spanRecord = document.getElementById('record')
-const pResult = document.getElementById('result')
-
+const buttons = document.getElementById('buttons')
+const restartBtn = document.getElementById('restart-button')
 
 let elementsSize
 let canvasSize
+let winResizeCheck = false
 let level = 0
 let lives = 3
 
 let timeStart
 let timeInterval
+
+let result = ''
 
 const playerPosition = {
     x: undefined,
@@ -49,6 +52,11 @@ function setCanvasSize() {
 
     playerPosition.x = undefined
     playerPosition.y = undefined
+
+    if (winResizeCheck) {
+        showWinMessage()
+        return
+    }
     startGame()
 }
 
@@ -99,10 +107,10 @@ function startGame() {
 }
 
 function paintPlayer() {
+    game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y)
+
     checkGiftCollision(giftPosition.x, giftPosition.y)
     checkBombCollision(bombsPosition)
-
-    game.fillText(emojis['PLAYER'], playerPosition.x, playerPosition.y)
 }
 
 function moveUp() {
@@ -176,12 +184,14 @@ function gameOver() {
     playerPosition.y = undefined
     playerPosition.x = undefined
 
-    lives--
-
-    if (lives == 0) {
+    if (lives>0) {
+        lives--
+    } else if(lives == 0) {
         level = 0
         lives = 3
         timeStart = undefined
+        restartBtn.style.display = 'none'
+        buttons.style.display = 'flex'
     }
 
     startGame()
@@ -189,6 +199,7 @@ function gameOver() {
 
 function gameWin() {
     console.log('Felicidades, ganaste el juego')
+
     clearInterval(timeInterval)
 
     const recordTime = localStorage.getItem('record_time')
@@ -196,15 +207,17 @@ function gameWin() {
 
     if(recordTime){
         if(recordTime >= playerTime){
-            pResult.innerHTML = 'Superaste el anterior record: ' + recordTime + '. El nuevo record es: ' + playerTime
+            result = 'Superaste el anterior record. El nuevo record es: ' + playerTime
             localStorage.setItem('record_time', playerTime)
         } else{
-            pResult.innerHTML = 'No superaste el record'
+            result = 'No superaste el record'
         }
     } else{
         localStorage.setItem('record_time', playerTime)  
     }
-    
+
+    showWinAnimation()
+
     console.log({recordTime, playerTime});
 }
 
@@ -227,6 +240,67 @@ function showTime(){
 
 function showRecord(){
     spanRecord.innerHTML = localStorage.getItem('record_time')
+}
+
+function showWinAnimation(){
+    game.clearRect(0, 0, canvasSize, canvasSize)
+
+    const winMapRows = winMap.trim().split('\n')
+    const winMapElements = winMapRows.map(row => row.trim().split(''))
+
+    winMapElements.forEach((row, rowIndex) => {
+        setTimeout(function(){
+            row.forEach((col, colIndex) => {
+            const emoji = emojis[col]
+            const posX = elementsSize * (colIndex + 1) + 7
+            const posY = elementsSize * (rowIndex + 1) - 7
+
+            setTimeout(function () {
+                game.fillText(emoji, posX, posY)
+            }, colIndex * 20)
+        })}, rowIndex * 200)
+    })
+
+    setTimeout(function () {
+        game.clearRect(0, 0, canvasSize, canvasSize)
+    }, 2300)
+    
+    setTimeout(function () {
+        winMapElements.forEach((row, rowIndex) => {
+            row.forEach((col, colIndex) => {
+                const emoji = '💥'
+                const posX = elementsSize * (colIndex + 1) + 7
+                const posY = elementsSize * (rowIndex + 1) - 7
+    
+                game.fillText(emoji, posX, posY)
+            })
+        })
+    }, 2300)
+
+    setTimeout(function(){showWinMessage()}, 3000)
+}    
+
+function showWinMessage() {
+    winResizeCheck = true
+    game.clearRect(0, canvasSize/2 - elementsSize, canvasSize, elementsSize * 2 + 3)
+
+    game.font = elementsSize * 0.3 + 'px Rubik Spray Paint'
+    game.fillStyle = '#b34223'
+    game.textAlign = 'center'
+    game.fillText('¡FELICIDADES, PASASTE TODOS LOS NIVELES!', canvasSize/2, canvasSize/2 - elementsSize/5)
+    game.fillText(result, canvasSize/2, canvasSize/2 + elementsSize/3)
+
+    showRestartButton()
+}
+
+function showRestartButton() {
+    buttons.style.display = 'none'
+    restartBtn.style.display = 'inline-block'
+}
+
+function restartGame() {
+    lives = 0
+    gameOver()
 }
 
 window.addEventListener('keydown', (e)=>{
@@ -253,3 +327,5 @@ upBtn.addEventListener('click', moveUp())
 leftBtn.addEventListener('click', moveLeft())
 downBtn.addEventListener('click', moveDown())
 rightBtn.addEventListener('click', moveRight())
+
+restartBtn.addEventListener('click', restartGame())

@@ -24,7 +24,7 @@ const emojis = {
     -XXXXXXXXX
     -XXXXXXXXX
     OXXXXXXXXX`
-    );
+   );
   maps.push(`
     O--XXXXXXX
     X--XXXXXXX
@@ -73,3 +73,16 @@ const emojis = {
   -XXXXX---X
   --O----XXX
 `);
+
+const winMap = `
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+XXXXXXXXXX
+`
